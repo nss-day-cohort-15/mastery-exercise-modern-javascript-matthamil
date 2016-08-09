@@ -77,10 +77,10 @@ let robotModule = (() => {
     `);
 
     // Robots battle when clicked
-    $('#attack-button').click(api.battle);
+    $('#attack-button').click(battle);
   }
 
-  api.battle = () => {
+  function battle {
     if (player.health <= 0) {
       gameOver();
     }
