@@ -80,31 +80,28 @@ let robotModule = (() => {
     $('#attack-button').click(battle);
   }
 
-  function battle {
-    if (player.health <= 0) {
-      gameOver();
-    }
+  function battle() {
+    let playerAttack = player.attack();
+    let enemyAttack = enemy.attack();
 
-    else {
-      let playerAttack = player.attack();
-      let enemyAttack = enemy.attack();
+    console.log(`${player.name} attacked for ${playerAttack}`);
+    player.dealDamage(enemy, playerAttack);
+    updateHealthBars();
+    $('#attack-button').attr('disabled', 'true');
 
-      console.log(`${player.name} attacked for ${playerAttack}`);
-      player.dealDamage(enemy, playerAttack);
-      updateHealthBars();
-      $('#attack-button').attr('disabled', 'true');
-
-      setTimeout(() => {
-        if (enemy.health > 0) {
-          console.log(`${enemy.name} attacked for ${enemyAttack}`);
-          enemy.dealDamage(player, enemyAttack);
-          updateHealthBars();
-        } else {
+    setTimeout(() => {
+      if (enemy.health > 0) {
+        console.log(`${enemy.name} attacked for ${enemyAttack}`);
+        enemy.dealDamage(player, enemyAttack);
+        updateHealthBars();
+        if (player.health <= 0) {
           gameOver();
         }
-        $('#attack-button').removeAttr('disabled');
-      }, 1000);
-    }
+      } else {
+        gameOver();
+      }
+      $('#attack-button').removeAttr('disabled');
+    }, 1000);
   }
 
   function updateHealthBars() {
