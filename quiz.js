@@ -215,8 +215,6 @@ $(document).ready(() => {
           console.log(`${enemy.name} attacked for ${enemyAttack}`);
           enemy.dealDamage(player, enemyAttack);
           updateHealthBars();
-        } else {
-          //gameOver();
         }
         $('#attack-button').removeAttr('disabled');
       }, 1000);
