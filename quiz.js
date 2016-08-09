@@ -21,6 +21,7 @@ $(document).ready(() => {
 
     receiveDamage(amount) {
       if (this.health - amount <= 0) {
+        this.health = 0;
         gameOver();
       } else {
         this.health -= amount;
@@ -206,26 +207,50 @@ $(document).ready(() => {
 
       console.log(`${player.name} attacked for ${playerAttack}`);
       player.dealDamage(enemy, playerAttack);
-
-      console.log(`${enemy.name} attacked for ${enemyAttack}`);
-      enemy.dealDamage(player, enemyAttack);
-
       updateHealthBars();
+      $('#attack-button').attr('disabled', 'true');
+
+      setTimeout(() => {
+        if (enemy.health > 0) {
+          console.log(`${enemy.name} attacked for ${enemyAttack}`);
+          enemy.dealDamage(player, enemyAttack);
+          updateHealthBars();
+        } else {
+          //gameOver();
+        }
+        $('#attack-button').removeAttr('disabled');
+      }, 1000);
+
+
     }
 
     function updateHealthBars() {
-      console.log('player health', player.health);
       $('#player-healthbar').html(`${player.health}`);
       $('#player-healthbar').css('width', () => {
         return `${parseInt(player.health/player.startingHp * 100)}%`;
       });
 
-      console.log('enemy health', enemy.health);
       $('#enemy-healthbar').html(`${enemy.health}`);
       $('#enemy-healthbar').css('width', () => {
         return `${parseInt(enemy.health/enemy.startingHp * 100)}%`;
       });
     }
+  }
+
+  function gameOver() {
+    let winner, loser;
+    if (player.health === 0) {
+      winner = enemy;
+      loser = player;
+    } else {
+      winner = player;
+      loser = enemy;
+    }
+
+    $('#attack-button').remove();
+    $('#game-area').append(`
+      <h1>${winner.name} defeated ${loser.name}!</h1>
+    `)
   }
 
   $('#start').click(init);
