@@ -3,6 +3,19 @@ const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
 const jshint = require('gulp-jshint');
 
+const filesToMove = [
+  './src/css/*.css',
+  './src/index.html',
+  './src/bower_components/*'
+];
+
+gulp.task('move', () => {
+  // the base option sets the relative root for the set of files,
+  // preserving the folder structure
+  gulp.src(filesToMove, { base: './src/' })
+  .pipe(gulp.dest('dist'));
+});
+
 gulp.task('babel', () => {
   gulp.src('src/js/*.js')
     .pipe(babel({
@@ -17,7 +30,7 @@ gulp.task('uglify', () => {
     .pipe(gulp.dest('dist/minjs/'));
 });
 
-gulp.task('build', ['jshint', 'babel', 'uglify']);
+gulp.task('build', ['jshint', 'babel', 'uglify', 'move']);
 
 gulp.task('lint', () => {
   gulp.src('src/js/*.js')
@@ -25,4 +38,4 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['jshint', 'build', 'watch']);
+gulp.task('default', ['build', 'watch']);
