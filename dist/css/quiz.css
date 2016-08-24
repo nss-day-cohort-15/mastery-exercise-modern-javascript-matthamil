@@ -1,0 +1,14 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-family: 'Bungee Shade', cursive;
+  text-align: center;
+}
+
+#start {
+  display: block;
+  margin: 0 auto;
+  font-weight: bold;
+}

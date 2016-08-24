@@ -39,19 +39,19 @@ let robotModule = (() => {
 
       displayBattleScreen();
     }
-  };
+  }
 
   api.robotSelector = (selectValue, robotName) => {
     switch (selectValue) {
-        case 'RoboBird':    return new RoboBird(robotName);   break;
-        case 'Fly-o-Matic': return new FlyOMatic(robotName);  break;
-        case 'Stinkoman':   return new Stinkoman(robotName);  break;
-        case 'Iron Giant':  return new IronGiant(robotName);  break;
-        case 'Curiousity':  return new Curiousity(robotName); break;
-        case 'Apollo':      return new Apollo(robotName);     break;
+        case 'RoboBird':    return new RoboBird(robotName);
+        case 'Fly-o-Matic': return new FlyOMatic(robotName);
+        case 'Stinkoman':   return new Stinkoman(robotName);
+        case 'Iron Giant':  return new IronGiant(robotName);
+        case 'Curiousity':  return new Curiousity(robotName);
+        case 'Apollo':      return new Apollo(robotName);
         default: throw new Error(`Invalid robot selection: ${selectValue}.`);
       }
-  }
+  };
 
   function displayBattleScreen() {
     $('#game-area').html(`
@@ -129,7 +129,7 @@ let robotModule = (() => {
     $('#attack-button').remove();
     $('#game-area').append(`
       <h1>${winner.name} defeated ${loser.name}!</h1>
-    `)
+    `);
   }
 
   $('#start').click(init);

@@ -1,3 +1,5 @@
+'use strict';
+
 class Robot {
   constructor(name) {
     this.name = name;
@@ -55,7 +57,7 @@ class FlyOMatic extends Drone {
     // Attack range is between 10 and 50
     return Math.floor(Math.random() * (50 - 10 + 1)) + 10;
   }
-};
+}
 
 // Bipedals
 class Bipedal extends Robot {}

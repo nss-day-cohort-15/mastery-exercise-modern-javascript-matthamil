@@ -25,17 +25,17 @@ gulp.task('babel', () => {
 });
 
 gulp.task('uglify', () => {
-  gulp.src('dist/*.js')
+  gulp.src('dist/js/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('dist/minjs/'));
 });
 
-gulp.task('build', ['jshint', 'babel', 'uglify', 'move']);
+gulp.task('build', ['babel', 'uglify', 'move']);
 
-gulp.task('lint', () => {
+gulp.task('jshint', () => {
   gulp.src('src/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build']);
