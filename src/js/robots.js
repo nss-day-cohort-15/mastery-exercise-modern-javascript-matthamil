@@ -1,28 +1,28 @@
 class Robot {
-    constructor(name) {
-      this.name = name;
-    }
+  constructor(name) {
+    this.name = name;
+  }
 
-    // Initializes the health to a random value between a range
-    initHealth(min, max) {
-      this.health = Math.floor(Math.random() * (min - max)) + min;
+  // Initializes the health to a random value between a range
+  initHealth(min, max) {
+    this.health = Math.floor(Math.random() * (min - max)) + min;
 
-      // Used for updating the health bar
-      this.startingHp = this.health;
-    }
+    // Used for updating the health bar
+    this.startingHp = this.health;
+  }
 
-    dealDamage(target, damage) {
-      target.receiveDamage(damage);
-    }
+  dealDamage(target, damage) {
+    target.receiveDamage(damage);
+  }
 
-    receiveDamage(amount) {
-      if (this.health - amount <= 0) {
-        this.health = 0;
-      } else {
-        this.health -= amount;
-      }
+  receiveDamage(amount) {
+    if (this.health - amount <= 0) {
+      this.health = 0;
+    } else {
+      this.health -= amount;
     }
   }
+}
 
 // Drones
 class Drone extends Robot {}
@@ -55,7 +55,7 @@ class FlyOMatic extends Drone {
     // Attack range is between 10 and 50
     return Math.floor(Math.random() * (50 - 10 + 1)) + 10;
   }
-}
+};
 
 // Bipedals
 class Bipedal extends Robot {}
