@@ -6,7 +6,8 @@ const jshint = require('gulp-jshint');
 const filesToMove = [
   './src/css/*.css',
   './src/index.html',
-  './src/bower_components/*'
+  './src/bower_components/bootstrap/dist/css/bootstrap.min.css',
+  './src/bower_components/jquery/dist/jquery.min.js'
 ];
 
 gulp.task('move', () => {
